@@ -11,32 +11,28 @@
         <!--<button id="line" onclick="">Line</button>-->
         <p id="mouse">Mouse</p>
         <script>
-            var mouseX, mouseY, coords;
-
+            var mouseX, mouseY;
             var canvas = new Canvas('drawing-board');
-            var rect = canvas.canvas.getBoundingClientRect();
+            var style = window.getComputedStyle(canvas.canvas);
 
             var id = canvas.context.createImageData(1, 1); // only do this once per page
-            var d = id.data;                        // only do this once per page
-            d[0] = 255;
-            d[1] = 0;
-            d[2] = 0;
-            d[3] = 255;
-            
-            function draw(x, y) {
-                canvas.context.putImageData(id, x, y);
-            }
+            var d = id.data; // only do this once per page
+            d[0] = 255; // red
+            d[1] = 0; // green
+            d[2] = 0; // blue
+            d[3] = 255; // alpha
 
-            function drawEvent(event) {
+            function draw(event) {
                 mousePosition(event);
-                //draw(mouseX - rect.left, mouseY - rect.top);
-                draw((mouseX * (300/800)) - rect.left / 2, (mouseY * (150/600)) - rect.top / 2);
-                //alert(canvas.canvas.height);
+                
+                var coefficientX = canvas.canvas.width / Number(style.getPropertyValue('width').slice(0, 3))
+                var canvasX = coefficientX * mouseX - canvas.canvas.offsetLeft / 2;
+                var coefficientY = canvas.canvas.height / Number(style.getPropertyValue('height').slice(0, 3))
+                var canvasY = coefficientY * mouseY - canvas.canvas.offsetTop / 2;
+                canvas.context.putImageData(id, canvasX, canvasY);
             }
 
-            draw(10, 10);
-            draw(20, 20);
-            document.onclick = drawEvent;
+            document.addEventListener('click', draw);
             
             //canvas.drawLine(50, 0, 140, 100);
             document.onmousemove = mouseMovement;
