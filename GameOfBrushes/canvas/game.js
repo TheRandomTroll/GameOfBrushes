@@ -20,13 +20,3 @@ function mouseMovement(event) {
     document.getElementById('mouse').innerHTML =
         "Mouse X: " + mouseX + ", Mouse Y: " + mouseY;
 }
-
-
-
-/*
-function inCanvas(id) {
-    var canv = document.getElementById(id);
-    var coords = mousePosition();
-
-    if()
-}*/
