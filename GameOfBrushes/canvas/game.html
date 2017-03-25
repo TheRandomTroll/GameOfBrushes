@@ -18,8 +18,7 @@
             
             document.addEventListener('click', drawCond);
             document.addEventListener('mousemove', function(event) { canvas.drawOnCanvas(event) });
-            
-            document.onmousemove = mouseMovement;
+            document.addEventListener('mousemove', mouseMovement);
         </script>
     </body>
 </html>

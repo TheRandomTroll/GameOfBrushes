@@ -1,23 +1,34 @@
 function Canvas(id) {
     this.canvas = document.getElementById(id);
     this.context = this.canvas.getContext('2d');
+    this.context.lineWidth = 5;
+    this.context.strokeStyle = "#FF0000";
 
-    var imgData = this.context.createImageData(5, 5);
-    for(var i = 0; i < imgData.data.length; i += 4) {
-        imgData.data[i+0] = 255; // red
-        imgData.data[i+1] = 0; // green
-        imgData.data[i+2] = 0; // blue
-        imgData.data[i+3] = 255; // alpha
-    }
-
+    var began = false;
     this.drawOnCanvas = function (event) {
         // Note: the canvas parameter here is the Canvas object, not the html element    
         if(paint) {
+            // calculate the new position
             setMousePosition(event);
             var canvasX = mouseX - this.canvas.offsetLeft;
             var canvasY = mouseY - this.canvas.offsetTop;
-            this.context.putImageData(imgData, canvasX, canvasY);
-        }    
+            
+            if(!began) {
+                // begin a new line if there isn't a previous position
+                // gets executed only once: on mouse click
+                this.context.beginPath();
+                this.context.moveTo(canvasX, canvasY);
+                began = true;
+            }
+
+            // finish the previus line
+            this.context.lineTo(canvasX, canvasY);
+            this.context.stroke();
+            // begin the new line
+            this.context.beginPath();
+            this.context.moveTo(canvasX, canvasY);
+        }
+        else began = false;
     }
 }
 
