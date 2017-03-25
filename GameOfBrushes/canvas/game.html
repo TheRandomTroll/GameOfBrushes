@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Canvas</title>
+        <link rel="stylesheet" href="game.css">
+        <script src="game.js"></script>
+    </head>
+    <body>
+        <div id="drawing-board-div">
+            <canvas id="drawing-board" width="800" height="600"></canvas>
+        </div>
+        <br>
+        <!--<button id="line" onclick="">Line</button>-->
+        <p id="mouse">Mouse</p>
+        <script>
+            var canvas = new Canvas('drawing-board');
+            
+            document.addEventListener('click', drawCond);
+            document.addEventListener('mousemove', function(event) { canvas.drawOnCanvas(event) });
+            
+            document.onmousemove = mouseMovement;
+        </script>
+    </body>
+</html>
