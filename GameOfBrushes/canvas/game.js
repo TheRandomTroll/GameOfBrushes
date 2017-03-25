@@ -44,7 +44,7 @@ function drawCond(event) {
 }
 
 function mouseMovement(event) {
-    mousePosition(event);
+    setMousePosition(event);
     
     document.getElementById('mouse').innerHTML =
         "Mouse X: " + mouseX + ", Mouse Y: " + mouseY;
