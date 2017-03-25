@@ -1,0 +1,35 @@
+﻿@using Microsoft.Ajax.Utilities
+@model GameOfBrushes.Models.Game
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+
+<div>
+    <hr />
+        @foreach (var item in Model.Contestants)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <p>User: @Html.DisplayFor(modelItem => item.UserName)</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Rank: @Html.DisplayFor(modelItem => item.UserInfo.Rank)</p>
+                    </div>
+                </div>
+            </div>
+        }
+</div>
+<p>
+    @if (User.Identity.Name == Model.RoomCreator.UserName)
+    {
+        @Html.ActionLink("Delete", "Delete", new { Model.Id});
+    }
+    else
+    {
+        @Html.ActionLink("Leave", "Index");
+    }
+</p>

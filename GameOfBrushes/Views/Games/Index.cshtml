@@ -1,0 +1,31 @@
+﻿@model IEnumerable<GameOfBrushes.Models.Game>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Games</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@foreach (var item in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Html.DisplayFor(modelItem => item.Name)</h2>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-4">
+                <p>Game lobby creator: @Html.DisplayFor(modelItem => item.RoomCreator.UserName)</p>
+            </div>
+            <div class="col-md-6">
+                <p>@Html.DisplayFor(modelItem => item.Contestants.Count)/5 players</p>
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Join", "Join", new { id = item.Id })
+            </div>
+        </div>
+    </div>
+}

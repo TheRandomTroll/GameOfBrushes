@@ -14,16 +14,20 @@ namespace GameOfBrushes.Models
 
         public int Points { get; set; }
 
+        public virtual Game JoinedGame { get; set; }
         [NotMapped]
         public string GivenWord { get; set; }
 
+        [NotMapped]
         public string Rank => this.GetRank();
+
+
 
         private string GetRank()
         {
             if (Points < 10)
             {
-                return "Newcomer";
+                return "Junior Painter";
             }
             if (Points >= 10 && Points < 50)
             {

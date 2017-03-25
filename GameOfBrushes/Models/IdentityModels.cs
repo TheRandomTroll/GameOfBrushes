@@ -31,6 +31,8 @@ namespace GameOfBrushes.Models
         }
 
         public virtual DbSet<UserInfo> UserInfos { get; set; }
+
+        public virtual DbSet<Game> Games { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

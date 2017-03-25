@@ -6,11 +6,15 @@ using System.Web.Mvc;
 
 namespace GameOfBrushes.Controllers
 {
+    using GameOfBrushes.Models;
+
     public class HomeController : Controller
     {
+        private ApplicationDbContext context;
+        public ApplicationDbContext Context => this.context ?? new ApplicationDbContext();
         public ActionResult Index()
         {
-            return View();
+            return View(this.Context.Users);
         }
 
         public ActionResult About()

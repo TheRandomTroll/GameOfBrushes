@@ -20,7 +20,7 @@ namespace GameOfBrushes.Controllers
 
         private ApplicationDbContext context;
 
-        public ApplicationDbContext Context => this.context ?? new ApplicationDbContext(); 
+        
 
         public AccountController()
         {
@@ -406,11 +406,6 @@ namespace GameOfBrushes.Controllers
         public ActionResult ExternalLoginFailure()
         {
             return View();
-        }
-
-        public ActionResult Leaderboard()
-        {
-            return this.View(this.Context.Users);
         }
 
         protected override void Dispose(bool disposing)
