@@ -2,12 +2,13 @@ function Canvas(id) {
     this.canvas = document.getElementById(id);
     this.context = this.canvas.getContext('2d');
 
-    var id = this.context.createImageData(1, 1);
-    var d = id.data;
-    d[0] = 255; // red
-    d[1] = 0; // green
-    d[2] = 0; // blue
-    d[3] = 255; // alpha
+    var imgData = this.context.createImageData(5, 5);
+    for(var i = 0; i < imgData.data.length; i += 4) {
+        imgData.data[i+0] = 255; // red
+        imgData.data[i+1] = 0; // green
+        imgData.data[i+2] = 0; // blue
+        imgData.data[i+3] = 255; // alpha
+    }
 
     this.drawOnCanvas = function (event) {
         // Note: the canvas parameter here is the Canvas object, not the html element    
@@ -15,7 +16,7 @@ function Canvas(id) {
             setMousePosition(event);
             var canvasX = mouseX - this.canvas.offsetLeft;
             var canvasY = mouseY - this.canvas.offsetTop;
-            this.context.putImageData(id, canvasX, canvasY);
+            this.context.putImageData(imgData, canvasX, canvasY);
         }    
     }
 }
@@ -44,6 +45,7 @@ function drawCond(event) {
 }
 
 function mouseMovement(event) {
+    /* For testing purposes. Must be removed in the final program. */
     setMousePosition(event);
     
     document.getElementById('mouse').innerHTML =
