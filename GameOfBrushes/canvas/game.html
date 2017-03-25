@@ -2,12 +2,12 @@
 
 <html>
     <head>
-        <title>drawing board</title>
+        <title>Canvas</title>
         <link rel="stylesheet" href="game.css">
         <script src="game.js"></script>
     </head>
     <body>
-        <canvas id="drawing-board"></canvas><br>
+        <canvas id="drawing-board" width="400" height="300"></canvas><br>
         <!--<button id="line" onclick="">Line</button>-->
         <p id="mouse">Mouse</p>
         <script>
@@ -22,11 +22,24 @@
             d[2] = 0; // blue
             d[3] = 255; // alpha
 
-            document.addEventListener('click', function() { drawOnCanvas(canvas) });
+            var paint;
+            function drawCond(event) {
+                if(event) {
+                    switch (paint) {
+                        case true: // stop painting
+                            paint = false;
+                            break;
+                    
+                        default: // start painting (if paint in (undefined, false))
+                            paint = true;
+                            break;
+                    }
+                }
+            }
+            document.addEventListener('click', drawCond);
+            document.addEventListener('mousemove', function(event) { drawOnCanvas(event, canvas) });
             
-            //canvas.drawLine(50, 0, 140, 100);
             document.onmousemove = mouseMovement;
-            
         </script>
     </body>
 </html>
