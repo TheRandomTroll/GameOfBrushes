@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>drawing board</title>
+        <link rel="stylesheet" href="game.css">
+        <script src="game.js"></script>
+    </head>
+    <body>
+        <canvas id="drawing-board"></canvas><br>
+        <!--<button id="line" onclick="">Line</button>-->
+        <p id="mouse">Mouse</p>
+        <script>
+            var mouseX, mouseY, coords;
+
+            var canvas = new Canvas('drawing-board');
+            var rect = canvas.canvas.getBoundingClientRect();
+
+            var id = canvas.context.createImageData(1, 1); // only do this once per page
+            var d = id.data;                        // only do this once per page
+            d[0] = 255;
+            d[1] = 0;
+            d[2] = 0;
+            d[3] = 255;
+            
+            function draw(x, y) {
+                canvas.context.putImageData(id, x, y);
+            }
+
+            function drawEvent(event) {
+                mousePosition(event);
+                //draw(mouseX - rect.left, mouseY - rect.top);
+                draw((mouseX * (300/800)) - rect.left / 2, (mouseY * (150/600)) - rect.top / 2);
+                //alert(canvas.canvas.height);
+            }
+
+            draw(10, 10);
+            draw(20, 20);
+            document.onclick = drawEvent;
+            
+            //canvas.drawLine(50, 0, 140, 100);
+            document.onmousemove = mouseMovement;
+            
+        </script>
+    </body>
+</html>
