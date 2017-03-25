@@ -7,9 +7,6 @@ namespace GameOfBrushes.Models
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-
-    using GameOfBrushes.Utility;
-
     public class UserInfo
     {
         [Key]
@@ -20,7 +17,36 @@ namespace GameOfBrushes.Models
         [NotMapped]
         public string GivenWord { get; set; }
 
-        public string Rank => WebUtility.GetUserRank(this.Points);
+        public string Rank => this.GetRank();
 
+        private string GetRank()
+        {
+            if (Points < 10)
+            {
+                return "Newcomer";
+            }
+            if (Points >= 10 && Points < 50)
+            {
+                return "Drawing Rookie";
+            }
+            if (Points >= 50 && Points < 100)
+            {
+                return "Painting Apprentice";
+            }
+            if (Points >= 100 && Points < 150)
+            {
+                return "Brushmaster";
+            }
+            if (Points >= 150 && Points < 200)
+            {
+                return "Grandmaster of Art";
+            }
+
+            if (Points >= 200)
+            {
+                return "The Vinci";
+            }
+            return null;
+        }
     }
 }
