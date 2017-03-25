@@ -64,18 +64,18 @@ function mouseMovement(event) {
 }
 
 function Randomizer(timeDelta) {        
-    this.start = Number(new Date());  // Put the server time here !!!
-
     this.timeDelta = timeDelta; // in miliseconds
-    
-    /*
-    this.start = function() {
-        setTimeout(this.randomizeColor, this.timeDelta);
-    }
-    */
 
-    this.randomizeColor = function() {
-        // generate three random numbers (0-255) and convert them to hexadecimal
+    this.start = function(master) {
+        master.randColInt = setInterval(master.randomizeColor, master.timeDelta);
+    }
+
+    this.end = function(master) {
+        clearInterval(master.randColInt);
+    }
+
+    this.randomizeColor = function(master) {
+        /* Generate three random numbers (0-255) and convert them to hexadecimal */
         var red = Math.round(Math.random() * 255).toString(16);
         var green = Math.round(Math.random() * 255).toString(16);
         var blue = Math.round(Math.random() * 255).toString(16);
