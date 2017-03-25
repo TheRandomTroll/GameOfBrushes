@@ -14,10 +14,28 @@
         <!--<button id="line" onclick="">Line</button>-->
         <p id="mouse">Mouse</p>
         <script>
+            // set-up the canvas
             var canvas = new Canvas('drawing-board');
+            document.addEventListener('click', function(event) { drawCond(event) });
+            document.addEventListener('mousemove', function(event) { canvas.drawOnCanvas(canvas, event) });
             
-            document.addEventListener('click', drawCond);
-            document.addEventListener('mousemove', function(event) { canvas.drawOnCanvas(event) });
+            // initialize the randomizer
+            var randomizer = new Randomizer(canvas, 10000);
+            randomizer.start(randomizer);
+            //randomizer.end(randomizer) // end the randomizer
+
+            
+            function saveCanvToImg(canvas, id) {
+                /* store canvas drawing as image */
+                var canvasURL = canvas.toDataURL();
+                var img = document.getElementById(id);
+                img.src = canvasURL;    
+            }
+            
+        </script>
+        <button onclick="saveCanvToImg(canvas.canvas, 'canvas-img')">display image</button><br>
+        <img id="canvas-img" alt="canvas image">
+        <script>  // for testing
             document.addEventListener('mousemove', mouseMovement);
         </script>
     </body>

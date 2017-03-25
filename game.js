@@ -2,7 +2,7 @@ function Canvas(id) {
     this.canvas = document.getElementById(id);
     this.context = this.canvas.getContext('2d');
     this.context.lineWidth = 5;
-    //this.context.strokeStyle = "#FF0000";
+    this.context.strokeStyle = "#FF0000";
 
     var began = false;
     this.drawOnCanvas = function (master, event) {
@@ -29,15 +29,6 @@ function Canvas(id) {
             master.context.moveTo(canvasX, canvasY);
         }
         else began = false;
-    }
-
-    this.catchChange = function(master, color, width) {
-        if(color) {
-            master.context.strokeStyle = color;
-        }
-        else if(width) {
-            master.context.lineWidth = width;
-        }
     }
 }
 
@@ -72,18 +63,15 @@ function mouseMovement(event) {
         "Mouse X: " + mouseX + ", Mouse Y: " + mouseY;
 }
 
-function Randomizer(canvas, timeDelta) {        
-    this.canvas = canvas; // the canvas object
+function Randomizer(timeDelta) {        
     this.timeDelta = timeDelta; // in miliseconds
 
     this.start = function(master) {
-        master.randColInt = setInterval(function() { master.randomizeColor(master); }, master.timeDelta);
-        master.randWidInt = setInterval(function() { master.randomizeLineWidth(master); }, master.timeDelta);
+        master.randColInt = setInterval(master.randomizeColor, master.timeDelta);
     }
 
     this.end = function(master) {
         clearInterval(master.randColInt);
-        clearInterval(master.randWidInt);
     }
 
     this.randomizeColor = function(master) {
@@ -106,16 +94,6 @@ function Randomizer(canvas, timeDelta) {
             color += colors[i];
         }
         console.log(color);
-
-        master.canvas.catchChange(master.canvas, color, undefined);
-    }
-
-    this.randomizeLineWidth = function(master) {
-        /* Generate a random line width */
-        var width = Math.round(Math.random() * 15 + 1);
-        console.log(width);
-
-        master.canvas.catchChange(master.canvas, undefined, width);
     }
 }
             
