@@ -15,9 +15,15 @@
         <p id="mouse">Mouse</p>
         <script>
             var canvas = new Canvas('drawing-board');
-            
             document.addEventListener('click', drawCond);
             document.addEventListener('mousemove', function(event) { canvas.drawOnCanvas(event) });
+            
+            var randomizer = new Randomizer(2000);
+            var test = setInterval(randomizer.randomizeColor, randomizer.timeDelta);
+        </script>
+        <button onclick="randomizer.start">Start</button>
+        <script>  // for testing
+            console.log(Number(new Date()));
             document.addEventListener('mousemove', mouseMovement);
         </script>
     </body>
