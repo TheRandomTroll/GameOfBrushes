@@ -64,14 +64,13 @@ namespace GameOfBrushes.Controllers
                 return HttpNotFound();
             }
             var user = this.db.Users.Find(User.Identity.GetUserId());
-            game.Contestants.Add(user);
+            if (user.UserInfo == null)
+            {
+                user.UserInfo = this.db.UserInfos.FirstOrDefault(x => x.Id == user.UserInfoId);
+            }
             user.UserInfo.JoinedGame = game;
             user.UserInfo.JoinedGame_Id = game.Id;
-            db.Users.Attach(user);
-            var entry = db.Entry(user);
-            entry.Property(x => x.UserInfo.JoinedGame_Id).IsModified = true;
-            entry.Property(x => x.UserInfo.JoinedGame).IsModified = true;
-            db.SaveChanges();
+            game.Contestants.Add(user);
             return View(game);
         }
 

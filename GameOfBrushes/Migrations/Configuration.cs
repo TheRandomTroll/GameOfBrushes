@@ -5,20 +5,17 @@ namespace GameOfBrushes.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using System.Web;
 
     using GameOfBrushes.Models;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Microsoft.AspNet.Identity.Owin;
 
     internal sealed class Configuration : DbMigrationsConfiguration<GameOfBrushes.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "GameOfBrushes.Models.ApplicationDbContext";
         }
 
         protected override void Seed(GameOfBrushes.Models.ApplicationDbContext context)

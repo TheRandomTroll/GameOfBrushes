@@ -19,7 +19,7 @@ namespace GameOfBrushes.Controllers
 
         public ActionResult Index()
         {
-            return View(this.Context.Users.Where(x => !x.UserName.Contains("Bot")));
+            return View(this.Context.Users);
         }
 
         public ActionResult About()

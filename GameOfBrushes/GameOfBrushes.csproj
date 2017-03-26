@@ -202,14 +202,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703260005201_AddedIsActiveBoolean.cs" />
-    <Compile Include="Migrations\201703260005201_AddedIsActiveBoolean.Designer.cs">
-      <DependentUpon>201703260005201_AddedIsActiveBoolean.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703260657229_MadeUserInfoNonVirtual.cs" />
-    <Compile Include="Migrations\201703260657229_MadeUserInfoNonVirtual.Designer.cs">
-      <DependentUpon>201703260657229_MadeUserInfoNonVirtual.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Drawing.cs" />
@@ -295,14 +287,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703260005201_AddedIsActiveBoolean.resx">
-      <DependentUpon>201703260005201_AddedIsActiveBoolean.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703260657229_MadeUserInfoNonVirtual.resx">
-      <DependentUpon>201703260657229_MadeUserInfoNonVirtual.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
