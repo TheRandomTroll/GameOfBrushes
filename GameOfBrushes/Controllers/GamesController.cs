@@ -47,8 +47,6 @@ namespace GameOfBrushes.Controllers
         // GET: Games
         public ActionResult Index()
         {
-            var user = this.db.Users.Find(User.Identity.GetUserId());
-            user.UserInfo.JoinedGame = null;
             var games = db.Games.Include(g => g.RoomCreator);
             return View(games.ToList());
         }
@@ -68,6 +66,12 @@ namespace GameOfBrushes.Controllers
             var user = this.db.Users.Find(User.Identity.GetUserId());
             game.Contestants.Add(user);
             user.UserInfo.JoinedGame = game;
+            user.UserInfo.JoinedGame_Id = game.Id;
+            db.Users.Attach(user);
+            var entry = db.Entry(user);
+            entry.Property(x => x.UserInfo.JoinedGame_Id).IsModified = true;
+            entry.Property(x => x.UserInfo.JoinedGame).IsModified = true;
+            db.SaveChanges();
             return View(game);
         }
 
@@ -121,6 +125,11 @@ namespace GameOfBrushes.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Game game = db.Games.Find(id);
+            foreach (var user in game.Contestants)
+            {
+                user.UserInfo.JoinedGame_Id = null;
+                user.UserInfo.JoinedGame = null;
+            }
             db.Games.Remove(game);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -133,11 +142,6 @@ namespace GameOfBrushes.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public bool IsLoggedIn(ApplicationUser user)
-        {
-            return this.db.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId()) != null;
         }
     }
 }

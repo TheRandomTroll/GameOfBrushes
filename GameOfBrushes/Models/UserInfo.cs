@@ -14,13 +14,17 @@ namespace GameOfBrushes.Models
 
         public int Points { get; set; }
 
-        public virtual Game JoinedGame { get; set; }
+        [ForeignKey("JoinedGame_Id")]
+        public Game JoinedGame { get; set; }
+
+        
+        public int? JoinedGame_Id { get; set; }
+
         [NotMapped]
-        public string GivenWord { get; set; }
+        public Drawing Drawing { get; set; }
 
         [NotMapped]
         public string Rank => this.GetRank();
-
 
 
         private string GetRank()

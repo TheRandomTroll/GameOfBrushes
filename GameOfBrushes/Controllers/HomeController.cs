@@ -8,13 +8,18 @@ namespace GameOfBrushes.Controllers
 {
     using GameOfBrushes.Models;
 
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+
     public class HomeController : Controller
     {
         private ApplicationDbContext context;
-        public ApplicationDbContext Context => this.context ?? new ApplicationDbContext();
+
+        public ApplicationDbContext Context => this.context ?? (this.context = new ApplicationDbContext());
+
         public ActionResult Index()
         {
-            return View(this.Context.Users);
+            return View(this.Context.Users.Where(x => !x.UserName.Contains("Bot")));
         }
 
         public ActionResult About()

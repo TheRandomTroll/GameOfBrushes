@@ -19,9 +19,9 @@ namespace GameOfBrushes.Controllers
         private ApplicationUserManager _userManager;
 
         private ApplicationDbContext context;
-
+      
+          
         
-
         public AccountController()
         {
         }

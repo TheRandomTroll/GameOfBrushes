@@ -17,6 +17,7 @@ namespace GameOfBrushes.Models
 
         public string Name { get; set; }
 
+        public bool IsActive { get; set; }
         public ICollection<ApplicationUser> Contestants { get; set; }
         public ApplicationUser RoomCreator { get; set; }
 
