@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "LiveDemo";
+}
+
+<div id="drawing-board-div">
+    <canvas id="drawing-board" width="800" height="600"></canvas>
+</div>
+<br>
+<p id="dictionary">house,car,dog,cat,tree,pen,bottle,building,table,computer,window,Windows XP,chair,laptop,smartphone,book</p>
+<p id="topic">Current topic: </p>
+<script>
+    // set-up the canvas
+    var canvas = new Canvas('drawing-board');
+
+    var paint = false;
+    document.addEventListener('mousedown', function (event) { paint = true; });
+    document.addEventListener('mouseup', function (event) { paint = false; });
+    document.addEventListener('mousemove', function (event) {
+        if (paint) {
+            canvas.drawOnCanvas(canvas, event);
+        }
+        else {
+            // wipe the old data
+            mouse.startX = null;
+            mouse.startY = null;
+            mouse.endX = null;
+            mouse.endY = null;
+            began = false;
+        }
+    });
+
+    // initialize the randomizer
+    var randomizer = new Randomizer(canvas, 5000);
+    randomizer.start(randomizer);
+    //randomizer.end(randomizer); // end the randomizer
+
+    topic = randomizer.randomizeTopic(randomizer, 'dictionary');
+    console.log(topic);
+
+    var para = document.getElementById('topic');
+    para.innerText += " " + topic;
+</script>
+<!--<button onclick="saveCanvToImg(canvas.canvas, 'canvas-img')">display image</button><br>
+<img id="canvas-img" alt="canvas image"><br>-->
+<!--<a id="anchor" href="" download="Canvas">Save</a>
+<form method="POST" action=".asp" enctype="multipart/form-data">
+    <input type="image" src="" name="canvas-img">
+    <input type="submit" name="submit_image" value="Upload">
+</form>-->
+<script>
+    // for testing
+    // document.addEventListener('mousemove', mouseMovement);
+</script>
+

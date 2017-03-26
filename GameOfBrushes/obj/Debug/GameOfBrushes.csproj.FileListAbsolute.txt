@@ -80,3 +80,5 @@ E:\Visual Studio Projects\GameOfBrushes\GameOfBrushes\bin\Microsoft.Owin.Securit
 E:\Visual Studio Projects\GameOfBrushes\GameOfBrushes\obj\Debug\GameOfBrushes.csprojResolveAssemblyReference.cache
 E:\Visual Studio Projects\GameOfBrushes\GameOfBrushes\obj\Debug\GameOfBrushes.dll
 E:\Visual Studio Projects\GameOfBrushes\GameOfBrushes\obj\Debug\GameOfBrushes.pdb
+E:\Visual Studio Projects\GameOfBrushes\GameOfBrushes\obj\Debug\GameOfBrushes.Migrations.InitialCreate.resources
+E:\Visual Studio Projects\GameOfBrushes\GameOfBrushes\obj\Debug\GameOfBrushes.csproj.GenerateResource.Cache

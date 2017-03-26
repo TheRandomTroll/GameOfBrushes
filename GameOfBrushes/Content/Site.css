@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+canvas#drawing-board {
+    border: 2px solid white;
+}
+
+#dictionary {
+    display: none;
+}
