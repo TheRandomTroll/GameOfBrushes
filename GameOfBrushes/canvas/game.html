@@ -11,32 +11,50 @@
             <canvas id="drawing-board" width="800" height="600"></canvas>
         </div>
         <br>
-        <!--<button id="line" onclick="">Line</button>-->
-        <p id="mouse">Mouse</p>
+        <!--<p id="mouse">Mouse</p>-->
         <script>
             // set-up the canvas
             var canvas = new Canvas('drawing-board');
-            document.addEventListener('click', function(event) { drawCond(event) });
-            document.addEventListener('mousemove', function(event) { canvas.drawOnCanvas(canvas, event) });
             
-            // initialize the randomizer
-            var randomizer = new Randomizer(canvas, 10000);
-            randomizer.start(randomizer);
-            //randomizer.end(randomizer) // end the randomizer
+            var paint = false;
+            document.addEventListener('mousedown', function(event) { paint = true; });
+            document.addEventListener('mouseup', function(event) { paint = false; });
+            document.addEventListener('mousemove', function(event) {
+                if(paint) {
+                    canvas.drawOnCanvas(canvas, event);
+                }
+                else {
+                    // wipe the old data
+                    mouse.startX = null;
+                    mouse.startY = null;
+                    mouse.endX = null;
+                    mouse.endY = null;
+                    began = false;
+                }
+            });
 
+            // initialize the randomizer
+            var randomizer = new Randomizer(canvas, 5000);
+            randomizer.start(randomizer);
+            randomizer.end(randomizer); // end the randomizer
             
             function saveCanvToImg(canvas, id) {
-                /* store canvas drawing as image */
-                var canvasURL = canvas.toDataURL();
+                /* store canvas drawing as image */ 
+                var canvasURL = canvas.toDataURL('image/octet-stream;base64');
                 var img = document.getElementById(id);
-                img.src = canvasURL;    
+                img.src = canvasURL;
             }
-            
+
         </script>
-        <button onclick="saveCanvToImg(canvas.canvas, 'canvas-img')">display image</button><br>
-        <img id="canvas-img" alt="canvas image">
+        <!--<button onclick="saveCanvToImg(canvas.canvas, 'canvas-img')">display image</button><br>
+        <img id="canvas-img" alt="canvas image"><br>-->
+        <!--<a id="anchor" href="" download="Canvas">Save</a>
+        <form method="POST" action=".asp" enctype="multipart/form-data">
+            <input type="image" src="" name="canvas-img">
+            <input type="submit" name="submit_image" value="Upload">
+        </form>-->
         <script>  // for testing
-            document.addEventListener('mousemove', mouseMovement);
+            // document.addEventListener('mousemove', mouseMovement);
         </script>
     </body>
 </html>

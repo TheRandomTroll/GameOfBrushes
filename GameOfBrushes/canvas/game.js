@@ -1,35 +1,43 @@
+// see Canvas.drawOnCanvas
+var began = false;
+var mouse = {};
 function Canvas(id) {
     this.canvas = document.getElementById(id);
     this.context = this.canvas.getContext('2d');
     this.context.lineWidth = 5;
-    //this.context.strokeStyle = "#FF0000";
-
-    var began = false;
+    
     this.drawOnCanvas = function (master, event) {
         // Note: the canvas parameter here is the Canvas object, not the html element    
-        if(paint) {
-            // calculate the new position
-            setMousePosition(event);
-            var canvasX = mouseX - master.canvas.offsetLeft;
-            var canvasY = mouseY - master.canvas.offsetTop;
+        setMousePosition(event);
+        var canvasX = mouseX - master.canvas.offsetLeft;
+        var canvasY = mouseY - master.canvas.offsetTop;
+        
+        if(!began) {
+            // this code is only accessed once: when the user clicks
+            // required for set-up
+            mouse.startX = canvasX;
+            mouse.startY = canvasY;
             
-            if(!began) {
-                // begin a new line if there isn't a previous position
-                // gets executed only once: on mouse click
-                master.context.beginPath();
-                master.context.moveTo(canvasX, canvasY);
-                began = true;
-            }
-
-            // finish the previus line
-            master.context.lineTo(canvasX, canvasY);
-            master.context.stroke();
-            // begin the new line
-            master.context.beginPath();
-            master.context.moveTo(canvasX, canvasY);
+            began = true;
+            return null; // the code below shouldn't be exuecuted
         }
-        else began = false;
+        else {
+            mouse.endX = canvasX;
+            mouse.endY = canvasY;
+        }
+        // begin the new line
+        master.context.beginPath();
+        master.context.moveTo(mouse.startX, mouse.startY);
+
+        // finish the previus line
+        master.context.lineTo(mouse.endX, mouse.endY);
+        master.context.stroke();
+
+        // set up coordinates for next line
+        mouse.startX = mouse.endX;
+        mouse.startY = mouse.endY;
     }
+        
 
     this.catchChange = function(master, color, width) {
         if(color) {
@@ -48,31 +56,7 @@ function setMousePosition(event) {
     mouseY = event.clientY;
 }
 
-var paint;
-function drawCond(event) {
-    /* Start or stop painting on click */
-    if(event) {
-        switch (paint) {
-            case true: // stop painting
-                paint = false;
-                break;
-        
-            default: // start painting (if paint in (undefined, false))
-                paint = true;
-                break;
-        }
-    }
-}
-
-function mouseMovement(event) {
-    /* For testing purposes. Must be removed in the final program. */
-    setMousePosition(event);
-    
-    document.getElementById('mouse').innerHTML =
-        "Mouse X: " + mouseX + ", Mouse Y: " + mouseY;
-}
-
-function Randomizer(canvas, timeDelta) {        
+function Randomizer(canvas, timeDelta) {
     this.canvas = canvas; // the canvas object
     this.timeDelta = timeDelta; // in miliseconds
 
@@ -118,4 +102,12 @@ function Randomizer(canvas, timeDelta) {
         master.canvas.catchChange(master.canvas, undefined, width);
     }
 }
-            
+
+// obsolete
+function mouseMovement(event) {
+    /* For testing purposes. Must be removed in the final program. */
+    setMousePosition(event);
+    
+    document.getElementById('mouse').innerHTML =
+        "Mouse X: " + mouseX + ", Mouse Y: " + mouseY;
+}
