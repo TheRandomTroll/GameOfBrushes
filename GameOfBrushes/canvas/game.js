@@ -101,13 +101,31 @@ function Randomizer(canvas, timeDelta) {
 
         master.canvas.catchChange(master.canvas, undefined, width);
     }
+
+    this.randomizeTopic = function(master, id) {
+        dictionary = readDict(id);
+        topic = Math.round(Math.random() * (dictionary.length - 1));
+        return dictionary[topic];
+    }
+}
+
+function readDict(id) {
+    var dict = document.getElementById(id);
+    console.log(dict.innerText.split(','));
+    return dict.innerText.split(',');
 }
 
 // obsolete
 function mouseMovement(event) {
     /* For testing purposes. Must be removed in the final program. */
     setMousePosition(event);
-    
     document.getElementById('mouse').innerHTML =
         "Mouse X: " + mouseX + ", Mouse Y: " + mouseY;
+}
+
+function saveCanvToImg(canvas, id) {
+    /* store canvas drawing as image */ 
+    var canvasURL = canvas.toDataURL('image/octet-stream;base64');
+    var img = document.getElementById(id);
+    img.src = canvasURL;
 }

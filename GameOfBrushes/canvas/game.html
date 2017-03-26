@@ -11,7 +11,8 @@
             <canvas id="drawing-board" width="800" height="600"></canvas>
         </div>
         <br>
-        <!--<p id="mouse">Mouse</p>-->
+        <p id="dictionary">house,car,dog,cat,tree,pen,bottle,building,table,computer,window,Windows XP,chair,laptop,smartphone,book</p>
+        <p id="topic">Current topic: </p>
         <script>
             // set-up the canvas
             var canvas = new Canvas('drawing-board');
@@ -36,15 +37,13 @@
             // initialize the randomizer
             var randomizer = new Randomizer(canvas, 5000);
             randomizer.start(randomizer);
-            randomizer.end(randomizer); // end the randomizer
+            //randomizer.end(randomizer); // end the randomizer
             
-            function saveCanvToImg(canvas, id) {
-                /* store canvas drawing as image */ 
-                var canvasURL = canvas.toDataURL('image/octet-stream;base64');
-                var img = document.getElementById(id);
-                img.src = canvasURL;
-            }
-
+            topic = randomizer.randomizeTopic(randomizer, 'dictionary');
+            console.log(topic);
+            
+            var para = document.getElementById('topic');
+            para.innerText += " " + topic;
         </script>
         <!--<button onclick="saveCanvToImg(canvas.canvas, 'canvas-img')">display image</button><br>
         <img id="canvas-img" alt="canvas image"><br>-->
